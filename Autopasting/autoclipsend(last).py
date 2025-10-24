@@ -32,9 +32,25 @@ def send_dialogue(k):
 
             with open(file_path,"a",encoding="utf-8") as file:
                 file.write(f"{clip_content}\n\n")
-
     except KeyError:
         pass    
+    
+    try:
+        if keyboard.Key.ctrl in pressed_key and keyboard.KeyCode(char='l') in pressed_key:
+            file_path=''
+            root=tkinter.Tk()
+            root.withdraw()
+            file_path=filedialog.asksaveasfilename(
+                title='save as(obsidian)',
+                defaultextension="*.md",
+                filetypes=[
+                    ("all files","*.*"),
+                    ("text file","*.txt")
+                    ]
+                    )
+    except KeyError:
+        pass
+
 
 def combine_func(k):
     press(k)
@@ -50,8 +66,7 @@ def release(k):
 with keyboard.Listener(on_press=combine_func,on_release=release) as listener:
     listener.join()
 
-#with keyboard.Listener(on_press=send_dialogue) as listener:
-#    listener.join()
+
 
 
 
